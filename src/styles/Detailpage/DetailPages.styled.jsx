@@ -219,7 +219,7 @@ export const ChattingInput = styled.input`
 export const DotsLoader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   width: 100px;
   height: 20px;
 `;
@@ -369,6 +369,7 @@ export const NoticeDiv = styled.div`
 `;
 
 export const OneBitImg = styled.img`
+  margin-top: 15px;
   width: 100%;
   height: auto;
 `;
