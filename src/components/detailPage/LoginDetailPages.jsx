@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import api from '../../api/api.js';
+import React, { useState, useEffect, useRef } from "react";
+import api from "../../api/api.js";
 import {
   ChatbotDiv,
   AllMessageDiv,
@@ -13,12 +13,13 @@ import {
   ChattingInput,
   DotsLoader,
   Dot,
-} from '../../styles/Detailpage/DetailPages.styled.jsx';
-import CircleImage from '../../images/DetailPage/Circle.svg';
-import MessageSendImage from '../../images/DetailPage/MessageSend.svg';
+} from "../../styles/Detailpage/DetailPages.styled.jsx";
+import OneBitBaseball from "./OneBitBaseball.jsx";
+import CircleImage from "../../images/DetailPage/Circle.svg";
+import MessageSendImage from "../../images/DetailPage/MessageSend.svg";
 
 export default function DetailPage() {
-  const [prompt, setPrompt] = useState('');
+  const [prompt, setPrompt] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
 
   const [loading, setLoading] = useState(false); // 로딩 상태 관리
@@ -37,7 +38,7 @@ export default function DetailPage() {
   function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+    if (parts.length === 2) return parts.pop().split(";").shift();
     return null;
   }
 
@@ -52,23 +53,23 @@ export default function DetailPage() {
     if (!prompt.trim()) return; // 입력이 없으면 아무 작업도 하지 않음
 
     // 질문을 먼저 채팅 창에 추가
-    const newQuestion = { type: 'question', content: prompt };
+    const newQuestion = { type: "question", content: prompt };
     setChatHistory((prevHistory) => [...prevHistory, newQuestion]);
 
     setLoading(true); // 로딩 상태로 전환
 
     try {
-      const url = 'api/v1/chat/send';
+      const url = "api/v1/chat/send";
       const data = {
         prompt: prompt,
       };
 
       // 쿠키에서 'jwtToken' 값을 가져옴
-      const token = getCookie('jwtToken');
+      const token = getCookie("jwtToken");
 
       const response = await api.post(url, data, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -76,25 +77,25 @@ export default function DetailPage() {
       // Bot의 응답을 찾음
       const botResponse = response.data
         .reverse()
-        .find((item) => item.startsWith('Bot:'));
+        .find((item) => item.startsWith("Bot:"));
       const botContent = botResponse
-        ? botResponse.replace('Bot: ', '')
-        : 'No response from bot.';
+        ? botResponse.replace("Bot: ", "")
+        : "No response from bot.";
 
       // API 응답을 채팅창에 추가
       const newAnswer = {
-        type: 'answer',
+        type: "answer",
         content: botContent, // Bot 응답의 내용만을 추가
       };
       setChatHistory((prevHistory) => [...prevHistory, newAnswer]);
 
       setLoading(false); // 로딩 상태 해제
-      setPrompt(''); // 입력 필드 초기화
+      setPrompt(""); // 입력 필드 초기화
 
       console.log(response.data);
     } catch (error) {
       console.error(
-        'Chatbot error',
+        "Chatbot error",
         error.response ? error.response.data : error
       );
       setLoading(false); // 오류 발생 시 로딩 상태 해제
@@ -120,7 +121,7 @@ export default function DetailPage() {
 
           {chatHistory.map((message, index) => (
             <>
-              {message.type === 'question' ? (
+              {message.type === "question" ? (
                 <MessageDiv key={index} justifycontent="end">
                   <SendspeechbubbleDiv height="33px">
                     <Textspan fontsize="15px" marginbottom="0">
@@ -144,12 +145,14 @@ export default function DetailPage() {
           {loading && (
             <MessageDiv margintop="10px" flexdirection="column">
               <ChatbotImg src={CircleImage} />
-              <BotspeechbubbleDiv width="102px">
+              {/* <BotspeechbubbleDiv width="102px"> */}
+              <BotspeechbubbleDiv>
                 <DotsLoader>
                   <Dot />
                   <Dot />
                   <Dot />
                 </DotsLoader>
+                <OneBitBaseball />
               </BotspeechbubbleDiv>
             </MessageDiv>
           )}
@@ -165,9 +168,9 @@ export default function DetailPage() {
               onChange={handleMessageChange}
               // 엔터 누르면 질문 전송
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === "Enter") {
                   handleChatApi();
-                  setPrompt(''); // 입력값 초기화
+                  setPrompt(""); // 입력값 초기화
                 }
               }}
             ></ChattingInput>
@@ -178,7 +181,7 @@ export default function DetailPage() {
               cursor="pointer"
               onClick={() => {
                 handleChatApi();
-                setPrompt('');
+                setPrompt("");
               }}
             />
           </ChattingDiv>
