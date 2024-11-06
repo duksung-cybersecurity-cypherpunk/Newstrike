@@ -50,7 +50,7 @@ export default function Unsubscribe() {
           },
         }
       );
-
+      alert("구독 해지가 완료되었습니다.");
       navigate("/Mypage");
       console.log(response.data);
     } catch (error) {
@@ -58,9 +58,10 @@ export default function Unsubscribe() {
         "구독해지 error",
         error.response ? error.response.data : error
       );
+      alert("구독 신청을 하지 않은 이메일입니다.");
     }
   };
-  
+
   return (
     <BodyDiv>
       <WrapperDiv height="67vh" justifyContent="start">
