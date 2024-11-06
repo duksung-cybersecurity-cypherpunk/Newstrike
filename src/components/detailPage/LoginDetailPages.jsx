@@ -132,6 +132,7 @@ export default function DetailPage() {
               ) : (
                 <MessageDiv key={index} margintop="10px" flexdirection="column">
                   <ChatbotImg src={CircleImage} />
+                  {/* 답변이 생성되고 있습니다.MAAAA00031 */}
                   <BotspeechbubbleDiv>
                     <Textspan fontsize="15px" marginbottom="0">
                       {message.content}
@@ -147,11 +148,13 @@ export default function DetailPage() {
               <ChatbotImg src={CircleImage} />
               {/* <BotspeechbubbleDiv width="102px"> */}
               <BotspeechbubbleDiv>
-                <DotsLoader>
+                {/* <DotsLoader>
                   <Dot />
                   <Dot />
                   <Dot />
-                </DotsLoader>
+                </DotsLoader> */}
+                답변이 생성되고 있습니다. <br /> 기다리는 동안 한입 야구를
+                즐겨보세요!
                 <OneBitBaseball />
               </BotspeechbubbleDiv>
             </MessageDiv>
