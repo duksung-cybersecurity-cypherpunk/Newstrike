@@ -1,4 +1,9 @@
 # Newstrike
+
+## 필독
+
+각 기능별로 브랜치를 나눠두었습니다!! Chatbot, Newsletter, Backend, Front 총 네 개의 브랜치가 있으니 참고 바랍니다.
+
 ## 작품 소개
 ‘Newstrike’는 **야구 뉴스레터**와 **실시간 챗봇 기능**을 제공하는 프로그램입니다.
 
